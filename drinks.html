@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Don Matías</title>
+    <link rel="stylesheet" href="assets/css/menu-list.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <button class="back-button" onclick="window.location.href='menu.html'"></button>
+        <h1 class="header-title" id="pageTitle">Drinks Menú</h1>
+        <span></span>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+        <div class="category-scroll" id="categoryScroll">
+            <!-- generado por JS -->
+        </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="container">
+        <h2 class="section-title" id="sectionTitle" style="display:none;"></h2>
+        <div class="menu-list" id="menuList">
+            <!-- generado por JS -->
+        </div>
+    </div>
+
+    <button id="scrollToTop" class="scroll-to-top" onclick="if(window.menuEngine) window.menuEngine.scrollToTop()">↑</button>
+
+    <!-- MODAL -->
+    <div id="dishModal" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close" onclick="if(window.menuEngine) window.menuEngine.closeModal()">&times;</button>
+
+            <div class="modal-image-container" id="modalImageContainer">
+                <div class="modal-emoji" id="modalEmoji">🍽️</div>
+            </div>
+            <div class="modal-accent"></div>
+
+            <div class="modal-content">
+                <div class="modal-tags" id="modalTags"></div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-price" id="modalPrice"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/data/menu-drinks-data.js"></script>
+    <script src="assets/js/menu-engine.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const config = {
+            data: drinksMenuData,
+            categoryLabels: {
+                'drinks': 'drinks',
+            },
+            viewButtonText: 'VER',
+            showImages: true
+        };
+        // Crear instancia del motor
+        window.menuEngine = new MenuEngine(config);
+    });
+    </script>
+</body>
+</html>
