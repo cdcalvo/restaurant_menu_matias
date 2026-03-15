@@ -9,7 +9,7 @@ const breakfastMenuData = {
          tags: ['food', 'breakfast']
      },
      {
-         image: 'assets/img/breakfast/calentado_con_huevos_arepa con_queso.webp',
+         image: 'assets/img/breakfast/calentado_con_huevos_arepa_con_queso.webp',
          emoji: '🍳',
          title: 'CALENTADO CON HUEVOS PERICOS Y AREPA CON QUESO',
          description: 'Calentado with Scrambled Eggs and Corn Cake',
