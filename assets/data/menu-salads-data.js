@@ -25,14 +25,13 @@ const saladsMenuData = {
             price: '13.99',
             tags: ['food', 'salad']
         },
-        /*{
-            image: 'assets/img/salads_soups/',
+        {
             emoji: '🥗',
             title: 'ENSALADA VERDE SMALL',
             description: 'Small Green Salad',
             price: '5.99',
             tags: ['food', 'salad']
-        }*/
+        }
     ],
     SOUPS: [
         {
@@ -59,8 +58,7 @@ const saladsMenuData = {
             price: '20.00',
             tags: ['food', 'soup']
         },
-       /* {
-            image: 'assets/img/salads_soups/',
+        {
             emoji: '🍲',
             title: 'SANCOCHO DE GALLINA (SMALL)',
             description: 'Only on Friday, Saturday & Sunday.',
@@ -68,7 +66,6 @@ const saladsMenuData = {
             tags: ['food', 'soup']
         },
         {
-            image: 'assets/img/salads_soups/.jpg',
             emoji: '🍲',
             title: 'SANCOCHO DE GALLINA (LARGE)',
             description: 'Only on Friday, Saturday & Sunday.',
@@ -76,7 +73,6 @@ const saladsMenuData = {
             tags: ['food', 'soup']
         },
         {
-            image: 'assets/img/salads_soups/.jpg',
             emoji: '🍲',
             title: 'SOPA DE POLLO (SMALL)',
             description: 'Available Monday through Friday.',
@@ -84,7 +80,6 @@ const saladsMenuData = {
             tags: ['food', 'soup']
         },
         {
-            image: 'assets/img/salads_soups/',
             emoji: '🍲',
             title: 'SOPA DE POLLO (LARGE)',
             description: 'Available Monday through Friday.',
@@ -92,13 +87,12 @@ const saladsMenuData = {
             tags: ['food', 'soup']
         },
         {
-            image: 'assets/img/salads_soups/',
             emoji: '🍲',
             title: 'SOPA DEL DIA',
             description: 'Available Monday to Thursday. Este plato solamente está disponible de lunes a jueves.',
             price: '12.50',
             tags: ['food', 'soup']
-        }*/
+        }
     ]
 };
 
