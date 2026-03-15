@@ -118,7 +118,7 @@ const drinksMenuData = {
             tags: ['drinks', 'juice', 'classic']    
         },
         {
-            image: 'assets/img/drinks/jugo_de_ guanabana.webp', // URL de la imagen
+            image: 'assets/img/drinks/jugo_de_guanabana.webp', // URL de la imagen
             emoji: '🧃', // Mantener emoji como fallback
             title: 'GUANÁBANA',
             description: 'Water/Milk.',
