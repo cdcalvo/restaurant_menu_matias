@@ -417,7 +417,6 @@ class MenuEngine {
         // Actualizar imagen/emoji en modal
         if (modalImageContainer) {
             if (isImage) {
-                // Detectar si es un QR basándose en el nombre del archivo o título
                 const isQR = imageOrEmoji.toLowerCase().includes('qr') || 
                             decodedTitle.toLowerCase().includes('qr') ||
                             decodedTitle.toLowerCase().includes('scann') ||
@@ -426,14 +425,42 @@ class MenuEngine {
                 
                 const objectFit = isQR ? 'contain' : 'cover';
                 const background = isQR ? 'linear-gradient(135deg, #fbbf24, #f59e0b)' : 'transparent';
-                
-                modalImageContainer.innerHTML = `
-                    <img src="${imageOrEmoji}" alt="${decodedTitle}" 
-                         style="width: 100%; height: 100%; object-fit: ${objectFit}; object-position: center; background: ${background};" 
-                         onerror="this.parentElement.innerHTML='<div class=\\'modal-emoji\\'>${imageOrEmoji}</div>';">
-                `;
+
+                // Eliminar emoji anterior si existía
+                const oldEmoji = modalImageContainer.querySelector('.modal-emoji');
+                if (oldEmoji) oldEmoji.remove();
+
+                // Reutilizar img existente o crear una nueva
+                let img = modalImageContainer.querySelector('img.modal-img');
+                if (!img) {
+                    img = document.createElement('img');
+                    img.className = 'modal-img';
+                    modalImageContainer.insertBefore(img, modalImageContainer.firstChild);
+                }
+                img.src = imageOrEmoji;
+                img.alt = decodedTitle;
+                img.style.cssText = `width:100%; height:100%; object-fit:${objectFit}; object-position:center; background:${background};`;
+                img.onerror = function() {
+                    this.remove();
+                    const em = document.createElement('div');
+                    em.className = 'modal-emoji';
+                    em.textContent = imageOrEmoji;
+                    modalImageContainer.insertBefore(em, modalImageContainer.firstChild);
+                };
+
             } else {
-                modalImageContainer.innerHTML = `<div class="modal-emoji">${imageOrEmoji}</div>`;
+                // Eliminar img anterior si existía
+                const oldImg = modalImageContainer.querySelector('img.modal-img');
+                if (oldImg) oldImg.remove();
+
+                // Reutilizar emoji existente o crear uno nuevo
+                let emojiEl = modalImageContainer.querySelector('.modal-emoji');
+                if (!emojiEl) {
+                    emojiEl = document.createElement('div');
+                    emojiEl.className = 'modal-emoji';
+                    modalImageContainer.insertBefore(emojiEl, modalImageContainer.firstChild);
+                }
+                emojiEl.textContent = imageOrEmoji;
             }
         }
 
