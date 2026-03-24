@@ -221,6 +221,17 @@ class MenuEngine {
     createMenuItem(item) {
         const menuItem = document.createElement('div');
         menuItem.className = 'menu-item';
+        menuItem.style.cursor = 'pointer';
+        menuItem.onclick = () => {
+            this.openModal(
+                item.image || item.emoji,
+                item.title || '',
+                item.price || '',
+                item.description || '',
+                JSON.stringify(item.tags || []),
+                !!item.image
+            );
+        };
         
         const safeTitle = this.escapeHtml(item.title || '');
         const safeDescription = this.escapeHtml(item.description || '');

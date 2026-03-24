@@ -274,6 +274,7 @@ body::before {
 }
 
 .view-button {
+    display: none;
     padding: 5px 14px;
     border-radius: 8px;
     background: linear-gradient(135deg, var(--colombia-yellow), var(--gold-accent));
