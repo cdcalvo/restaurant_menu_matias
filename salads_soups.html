@@ -40,6 +40,19 @@
 
             <div class="modal-image-container" id="modalImageContainer">
                 <div class="modal-emoji" id="modalEmoji">🍽️</div>
+
+                <!-- Botones de navegación -->
+                <button class="modal-nav-btn modal-nav-prev"
+                        onclick="event.stopPropagation(); if(window.menuEngine) window.menuEngine.openModalByIndex(window.menuEngine.currentItemIndex - 1)">
+                    &#8249;
+                </button>
+                <button class="modal-nav-btn modal-nav-next"
+                        onclick="event.stopPropagation(); if(window.menuEngine) window.menuEngine.openModalByIndex(window.menuEngine.currentItemIndex + 1)">
+                    &#8250;
+                </button>
+
+                <!-- Contador -->
+                <div class="modal-counter" id="modalCounter">1 / 1</div>
             </div>
             <div class="modal-accent"></div>
 

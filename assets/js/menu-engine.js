@@ -15,7 +15,9 @@ class MenuEngine {
         
         this.currentCategory = this.config.allCategoryKey;
         this.init();
-        this.scrollPosition = 0; // Agregar esta línea
+        this.scrollPosition = 0;
+        this.currentItemIndex = 0;
+        this.currentItemsList = [];
     }
 
     init() {
@@ -141,6 +143,14 @@ class MenuEngine {
     }
 
     renderMenuItems(category) {
+        // Guardar lista plana para navegación del modal
+        if (category === this.config.allCategoryKey) {
+            this.currentItemsList = Object.keys(this.data)
+                .filter(k => k !== this.config.allCategoryKey)
+                .flatMap(k => this.data[k] || []);
+        } else {
+            this.currentItemsList = this.data[category] || [];
+        }
         const menuList = document.querySelector('.menu-list');
         if (!menuList) return;
 
@@ -223,6 +233,8 @@ class MenuEngine {
         menuItem.className = 'menu-item';
         menuItem.style.cursor = 'pointer';
         menuItem.onclick = () => {
+            const index = this.currentItemsList.findIndex(i => i.title === item.title);
+            this.currentItemIndex = index;
             this.openModal(
                 item.image || item.emoji,
                 item.title || '',
@@ -377,6 +389,21 @@ class MenuEngine {
         const decodedTitle = this.unescapeHtml(title);
         const decodedDescription = this.unescapeHtml(description);
         this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Buscar el item en la lista actual para guardar su índice
+        const foundIndex = this.currentItemsList.findIndex(
+            item => (item.title || '') === this.unescapeHtml(title)
+        );
+        if (foundIndex !== -1) this.currentItemIndex = foundIndex;
+
+        // Actualizar contador
+        const counter = document.getElementById('modalCounter');
+        if (counter && this.currentItemsList.length > 1) {
+            counter.textContent = `${this.currentItemIndex + 1} / ${this.currentItemsList.length}`;
+            counter.style.display = 'block';
+        } else if (counter) {
+            counter.style.display = 'none';
+        }
         
         let tags = [];
         try {
@@ -592,4 +619,27 @@ class MenuEngine {
     unescapeHtml(text) {
         return text.replace(/&apos;/g, "'").replace(/&quot;/g, '"');
     }
+
+    openModalByIndex(index) {
+    const items = this.currentItemsList;
+    if (!items || items.length === 0) return;
+    
+    this.currentItemIndex = (index + items.length) % items.length;
+    const item = items[this.currentItemIndex];
+    
+    this.openModal(
+        item.image || item.emoji,
+        item.title || '',
+        item.price || '',
+        item.description || '',
+        JSON.stringify(item.tags || []),
+        !!item.image
+    );
+
+    // Actualizar contador
+    const counter = document.getElementById('modalCounter');
+    if (counter) {
+        counter.textContent = `${this.currentItemIndex + 1} / ${items.length}`;
+    }
+}
 }

@@ -448,6 +448,51 @@ body::before {
     border-top: 2px solid rgba(255, 215, 0, 0.25);
     -webkit-text-fill-color: var(--colombia-yellow);  /* override el gradient-clip anterior */
 }
+/* ============ MODAL NAV ============ */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: clamp(40px, 8vw, 52px);
+    height: clamp(40px, 8vw, 52px);
+    border-radius: 50%;
+    background: rgba(13, 27, 42, 0.8);
+    border: 2px solid rgba(255, 215, 0, 0.35);
+    color: var(--colombia-yellow);
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(6px);
+    line-height: 1;
+}
+.modal-nav-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--colombia-yellow);
+    transform: translateY(-50%) scale(1.1);
+}
+.modal-nav-prev { left: 12px; }
+.modal-nav-next { right: 12px; }
+
+.modal-counter {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(13, 27, 42, 0.75);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    color: rgba(255, 248, 220, 0.7);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    letter-spacing: 0.05em;
+}
 
 /* ============ EMPTY STATE ============ */
 .empty-state {
