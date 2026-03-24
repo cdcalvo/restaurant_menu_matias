@@ -151,6 +151,7 @@ class MenuEngine {
         } else {
             this.currentItemsList = this.data[category] || [];
         }
+
         const menuList = document.querySelector('.menu-list');
         if (!menuList) return;
 
@@ -233,16 +234,18 @@ class MenuEngine {
         menuItem.className = 'menu-item';
         menuItem.style.cursor = 'pointer';
         menuItem.onclick = () => {
-            const index = this.currentItemsList.findIndex(i => i.title === item.title);
-            this.currentItemIndex = index;
-            this.openModal(
-                item.image || item.emoji,
-                item.title || '',
-                item.price || '',
-                item.description || '',
-                JSON.stringify(item.tags || []),
-                !!item.image
-            );
+            const cat = this.currentCategory;
+            const items = cat === this.config.allCategoryKey
+                ? Object.keys(this.data)
+                    .filter(k => k !== this.config.allCategoryKey)
+                    .flatMap(k => this.data[k] || [])
+                : this.data[cat] || [];
+
+            const index = items.findIndex(i => i.title === item.title);
+            this.currentItemIndex = index !== -1 ? index : 0;
+
+            // Usar openModalByIndex que ya maneja el item completo
+            this.openModalByIndex(this.currentItemIndex);
         };
         
         const safeTitle = this.escapeHtml(item.title || '');
@@ -269,27 +272,16 @@ class MenuEngine {
         }
         
         // Crear descripción solo si existe
-        const descriptionHtml = item.description ? 
+        const descriptionHtml = item.description ?
             `<div class="item-description">${item.description}</div>` : '';
         
         // Crear precio solo si existe
         const priceHtml = item.price ? 
-            `<div class="item-price">${item.price}</div>` : '';
-        
-        // Crear botón VER si hay información adicional O si hay imagen (para verla más grande)
-        const hasAdditionalInfo = item.description || item.price || (item.tags && item.tags.length > 0);
-        const hasImage = item.image || (this.config.showImages && item.image);
-        const buttonHtml = (hasAdditionalInfo || hasImage) ? 
-            `<button class="view-button" onclick="if(window.menuEngine) window.menuEngine.openModal('${item.image || item.emoji}', '${safeTitle}', '${item.price || ''}', '${safeDescription}', '${safeTagsJson}', ${item.image ? 'true' : 'false'})">
-                ${this.config.viewButtonText || 'VIEW'}
-            </button>` : '';
+            `<div class="item-price">${this.formatPrice(item.price, item.priceLabels)}</div>` : '';
         
         // Crear footer solo si hay precio o botón
-        const footerHtml = (priceHtml || buttonHtml) ? 
-            `<div class="item-footer">
-                ${priceHtml}
-                ${buttonHtml}
-            </div>` : '';
+        const footerHtml = priceHtml ? 
+            `<div class="item-footer">${priceHtml}</div>` : '';
         
         menuItem.innerHTML = `
             <div class="item-image" style="position: relative; overflow: hidden;">
@@ -390,12 +382,6 @@ class MenuEngine {
         const decodedDescription = this.unescapeHtml(description);
         this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Buscar el item en la lista actual para guardar su índice
-        const foundIndex = this.currentItemsList.findIndex(
-            item => (item.title || '') === this.unescapeHtml(title)
-        );
-        if (foundIndex !== -1) this.currentItemIndex = foundIndex;
-
         // Actualizar contador
         const counter = document.getElementById('modalCounter');
         if (counter && this.currentItemsList.length > 1) {
@@ -470,9 +456,9 @@ class MenuEngine {
         // Mostrar/ocultar precio según si existe
         if (modalPrice) {
             if (price && price.trim() !== '') {
-                modalPrice.textContent = price;
+                modalPrice.innerHTML = this.formatPrice(price);
                 modalPrice.style.display = 'block';
-            } else {
+            }else {
                 modalPrice.style.display = 'none';
             }
         }
@@ -639,6 +625,25 @@ class MenuEngine {
     }
 
     // Funciones auxiliares
+    formatPrice(price, labels = []) {
+        if (!price) return '';
+        const parts = Array.isArray(price)
+            ? price
+            : price.trim().split(/\s+/);
+
+        if (parts.length === 1) return `$${parts[0]}`;
+
+        if (labels && labels.length > 0) {
+            return parts.map((p, i) =>
+                `<span class="price-option">
+                    <span class="price-label">${labels[i] || ''}</span>
+                    $${p}
+                </span>`
+            ).join('');
+        }
+        return parts.map(p => `$${p}`).join(' / ');
+    }
+
     escapeHtml(text) {
         return text.replace(/'/g, "&apos;").replace(/"/g, "&quot;");
     }
@@ -648,13 +653,21 @@ class MenuEngine {
     }
 
     openModalByIndex(index) {
-        const items = this.currentItemsList;
-        if (!items || items.length === 0) return;
+        const cat = this.currentCategory;
+        let items = [];
+        if (cat === this.config.allCategoryKey) {
+            items = Object.keys(this.data)
+                .filter(k => k !== this.config.allCategoryKey)
+                .flatMap(k => this.data[k] || []);
+        } else {
+            items = this.data[cat] || [];
+        }
+
+        if (!items.length) return;
 
         this.currentItemIndex = (index + items.length) % items.length;
         const item = items[this.currentItemIndex];
 
-        // Actualizar imagen/emoji directamente sin reabrir el modal
         const modalImageContainer = document.querySelector('.modal-image-container');
         if (modalImageContainer) {
             const isImage = !!item.image;
@@ -663,10 +676,8 @@ class MenuEngine {
                              (item.title || '').toLowerCase().includes('qr');
                 const objectFit = isQR ? 'contain' : 'cover';
                 const background = isQR ? 'linear-gradient(135deg, #fbbf24, #f59e0b)' : 'transparent';
-
                 const oldEmoji = modalImageContainer.querySelector('.modal-emoji');
                 if (oldEmoji) oldEmoji.remove();
-
                 let img = modalImageContainer.querySelector('img.modal-img');
                 if (!img) {
                     img = document.createElement('img');
@@ -689,20 +700,19 @@ class MenuEngine {
             }
         }
 
-        // Actualizar textos
-        const modalTitle = document.getElementById('modalTitle');
-        const modalPrice = document.getElementById('modalPrice');
+        const modalTitle       = document.getElementById('modalTitle');
+        const modalPrice       = document.getElementById('modalPrice');
         const modalDescription = document.getElementById('modalDescription');
-        const modalTags = document.getElementById('modalTags');
-        const counter = document.getElementById('modalCounter');
+        const modalTags        = document.getElementById('modalTags');
+        const counter          = document.getElementById('modalCounter');
 
         if (modalTitle) modalTitle.textContent = item.title || '';
 
         if (modalPrice) {
-            if (item.price && item.price.trim() !== '') {
-                modalPrice.textContent = item.price;
+            if (item.price && (Array.isArray(item.price) ? item.price.length : item.price.trim())) {
+                modalPrice.innerHTML = this.formatPrice(item.price, item.priceLabels);
                 modalPrice.style.display = 'block';
-            } else {
+            }else {
                 modalPrice.style.display = 'none';
             }
         }
@@ -731,8 +741,15 @@ class MenuEngine {
             }
         }
 
-        if (counter) {
-            counter.textContent = `${this.currentItemIndex + 1} / ${items.length}`;
+        // Mostrar modal si no está activo
+        const modal = document.getElementById(this.config.modalId);
+        if (modal && !modal.classList.contains('active')) {
+            this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            document.body.style.top = `-${this.scrollPosition}px`;
+            document.body.classList.add('modal-open');
+            modal.classList.add('active');
         }
+
+        if (counter) counter.textContent = `${this.currentItemIndex + 1} / ${items.length}`;
     }
 }

@@ -122,7 +122,8 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'GUANÁBANA',
             description: 'Water/Milk.',
-            price: '6.50 6.99',
+            price: ['6.50', '6.99'],
+            priceLabels: ['Water', 'Milk'],  // ← etiquetas opcionales
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -138,7 +139,8 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'MARACUYÁ.',
             description:'Water/Milk.', 
-            price: '6.50 6.99',
+            price: ['6.50', '6.99'],
+            priceLabels: ['Water', 'Milk'],  // ← etiquetas opcionales
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -146,7 +148,8 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'MANGO.',
             description:'Water/Milk.', 
-            price: '6.50 6.99',
+            price: ['6.50', '6.99'],
+            priceLabels: ['Water', 'Milk'],  // ← etiquetas opcionales
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -154,7 +157,8 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'LULO',
             description: 'Water/Milk.',
-            price: '6.50 6.99',
+            price: ['6.50', '6.99'],
+            priceLabels: ['Water', 'Milk'],  // ← etiquetas opcionales
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -162,7 +166,8 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'MORA',
             description: 'Water/Milk.',
-            price: '6.50 6.99',
+            price: ['6.50', '6.99'],
+            priceLabels: ['Water', 'Milk'],  // ← etiquetas opcionales
             tags: ['drinks', 'juice', 'classic']    
         },
         {

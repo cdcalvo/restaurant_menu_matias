@@ -1,5 +1,5 @@
 const breakfastMenuData = {
-   Breakfast: [
+   breakfast: [
      {
          image: 'assets/img/breakfast/calentado_con_huevos_pericos_carne_arepa.webp',
          emoji: '🍳',
@@ -125,7 +125,8 @@ const breakfastMenuData = {
          emoji: '☕',
          title: 'CAFÉ CON LECHE',
          description: 'Regular/Large',
-         price: '4.25 6.50',
+         price: ['4.25', '6.50'],
+         priceLabels: ['Regular', 'Large'],  // ← etiquetas opcionales
          tags: ['drinks', 'coffee']
       },
       {
@@ -141,7 +142,8 @@ const breakfastMenuData = {
          emoji: '☕',
          title: 'CAFÉ AMERICANO',
          description: 'Regular/Large',
-         price: '3.50 5.50',
+         price: ['3.50', '5.50'],
+         priceLabels: ['Regular', 'Large'],  // ← etiquetas opcionales
          tags: ['drinks', 'coffee']
       },
       {

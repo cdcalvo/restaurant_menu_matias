@@ -248,6 +248,10 @@ body::before {
     text-overflow: ellipsis;
 }
 
+.item-title + .item-footer {
+    margin-top: 8px;   /* ← espacio extra cuando no hay descripción */
+}
+
 .item-description {
     font-size: 0.75rem;
     color: rgba(255, 248, 220, 0.55);
@@ -271,6 +275,26 @@ body::before {
     font-size: 0.95rem;
     font-weight: 700;
     color: var(--colombia-yellow);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+.price-option {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--colombia-yellow);
+}
+.price-label {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: rgba(255, 215, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .view-button {
@@ -440,13 +464,42 @@ body::before {
     flex: 1;
 }
 .modal-price {
+    margin-top: auto;
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(1.8rem, 6vw, 2.5rem);
     font-weight: 900;
     color: var(--colombia-yellow);
     padding-top: 16px;
     border-top: 2px solid rgba(255, 215, 0, 0.25);
-    -webkit-text-fill-color: var(--colombia-yellow);  /* override el gradient-clip anterior */
+    -webkit-text-fill-color: var(--colombia-yellow);
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.modal-price .price-option {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);  /* ← mismo tamaño que precio simple */
+    font-weight: 900;
+    color: var(--colombia-yellow);
+    -webkit-text-fill-color: var(--colombia-yellow);
+    margin-right: 24px;
+}
+
+.modal-price .price-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(255, 215, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    -webkit-text-fill-color: rgba(255, 215, 0, 0.5);
+}
+.modal-price .price-option:last-child {
+    margin-right: 0;
 }
 /* ============ MODAL NAV ============ */
 .modal-nav-btn {
