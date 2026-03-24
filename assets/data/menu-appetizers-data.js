@@ -109,7 +109,7 @@ const appetizersMenuData = {
          emoji: '🌭',
          title: 'CHORIZO',
          description: 'Colombian Sausage',
-         price: '4.00',
+         price: '3.99',
          tags: ['food', 'appetizers']
       },
       {

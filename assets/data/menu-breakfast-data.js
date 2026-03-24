@@ -37,7 +37,7 @@ const breakfastMenuData = {
          emoji: '🍳',
          title: 'CALENTADO CON HUEVOS PERICOS, AREPA Y CHICHARRON',
          description: 'Calentado with Scrambled Eggs, Pork Rinds and Corn Cake',
-         price: '15.50',
+         price: '16.00',
          tags: ['food', 'breakfast']
      },
      {
@@ -124,8 +124,8 @@ const breakfastMenuData = {
          image: 'assets/img/breakfast/cafe_con_leche.webp',
          emoji: '☕',
          title: 'CAFÉ CON LECHE',
-         description: 'Regular 3.50 | Large 5.95 / 6.00',
-         price: '3.50',
+         description: 'Regular/Large',
+         price: '4.25 6.50',
          tags: ['drinks', 'coffee']
       },
       {
@@ -140,8 +140,8 @@ const breakfastMenuData = {
          image: 'assets/img/breakfast/cafe_americano.webp',
          emoji: '☕',
          title: 'CAFÉ AMERICANO',
-         description: 'Regular 3.00 | Large 3.75',
-         price: '3.00',
+         description: 'Regular/Large',
+         price: '3.50 5.50',
          tags: ['drinks', 'coffee']
       },
       {

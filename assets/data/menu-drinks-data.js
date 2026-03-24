@@ -31,7 +31,7 @@ const drinksMenuData = {
             title: 'HEINEKEN',
             description: '100% Barley malt, choice hops and pure water give this brew unsurpassed clarity.',
             price: '5.00',
-            tags: ['drinks', 'beer', 'classic']    
+            tags: ['drinks', 'beer', 'classic']
         },
     ],
     WINES:[
@@ -40,7 +40,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'CLOT DIVERN BRUT',
             description: 'Glass 8Valencia, Spain.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         },
         {
@@ -48,7 +48,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'NOTES CHARDONNAY',
             description: 'Glass 8California.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         },
         {
@@ -56,7 +56,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'AYMARA CHARDONNAY',
             description: 'Glass 8Argentina/Mendoza.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         },
         {
@@ -64,7 +64,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'VIU MANENT RESERVA CABERNET SAUVIGNON',
             description: 'Glass 8Valle de Colchagua, Chile.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         }, 
         {
@@ -72,7 +72,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'CELLIER DES PRINCES MERLOT.',
             description: 'Glass  8Vin de Pays, France.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         }, 
         {
@@ -80,7 +80,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'CADIS PINOT GRIGIO.',
             description: 'Veneto,Italy.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         },         
         {
@@ -88,7 +88,7 @@ const drinksMenuData = {
             emoji: '🍾', // Mantener emoji como fallback
             title: 'SOL DE CHILE CABERNET SAUVIGNON.',
             description: 'Maule Valley,Chile.',
-            price: '$28.00',
+            price: '28.00',
             tags: ['Wines', 'classic', 'drinks']
         },
     ],
@@ -114,7 +114,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'LIMONADA DE COCO.',
             description: '',
-            price: '6.00',
+            price: '7.50',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -122,7 +122,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'GUANÁBANA',
             description: 'Water/Milk.',
-            price: '4.99 5.50',
+            price: '6.50 6.99',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -138,7 +138,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'MARACUYÁ.',
             description:'Water/Milk.', 
-            price: '4.99 6.00',
+            price: '6.50 6.99',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -146,7 +146,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'MANGO.',
             description:'Water/Milk.', 
-            price: '4.99 5.50',
+            price: '6.50 6.99',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -154,7 +154,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'LULO',
             description: 'Water/Milk.',
-            price: '4.99 5.50',
+            price: '6.50 6.99',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -162,7 +162,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'MORA',
             description: 'Water/Milk.',
-            price: '4.99 5.50',
+            price: '6.50 6.99',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -170,7 +170,7 @@ const drinksMenuData = {
             emoji: '🧃', // Mantener emoji como fallback
             title: 'LIMONADA NATURAL ',
             description: '',
-            price: '4.99',
+            price: '5.99',
             tags: ['drinks', 'juice', 'classic']    
         },
         {
@@ -192,7 +192,7 @@ const drinksMenuData = {
         {
             image: 'assets/img/drinks/perrier.webp', // URL de la imagen
             emoji: '🥤', // Mantener emoji como fallback
-            title: 'PERRIER ',
+            title: 'PERRIER',
             description: '',
             price: '3.50',
             tags: ['drinks', 'sodas', 'classic']    
