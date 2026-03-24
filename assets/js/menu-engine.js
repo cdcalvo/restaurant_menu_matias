@@ -648,25 +648,91 @@ class MenuEngine {
     }
 
     openModalByIndex(index) {
-    const items = this.currentItemsList;
-    if (!items || items.length === 0) return;
-    
-    this.currentItemIndex = (index + items.length) % items.length;
-    const item = items[this.currentItemIndex];
-    
-    this.openModal(
-        item.image || item.emoji,
-        item.title || '',
-        item.price || '',
-        item.description || '',
-        JSON.stringify(item.tags || []),
-        !!item.image
-    );
+        const items = this.currentItemsList;
+        if (!items || items.length === 0) return;
 
-    // Actualizar contador
-    const counter = document.getElementById('modalCounter');
-    if (counter) {
-        counter.textContent = `${this.currentItemIndex + 1} / ${items.length}`;
+        this.currentItemIndex = (index + items.length) % items.length;
+        const item = items[this.currentItemIndex];
+
+        // Actualizar imagen/emoji directamente sin reabrir el modal
+        const modalImageContainer = document.querySelector('.modal-image-container');
+        if (modalImageContainer) {
+            const isImage = !!item.image;
+            if (isImage) {
+                const isQR = (item.image || '').toLowerCase().includes('qr') ||
+                             (item.title || '').toLowerCase().includes('qr');
+                const objectFit = isQR ? 'contain' : 'cover';
+                const background = isQR ? 'linear-gradient(135deg, #fbbf24, #f59e0b)' : 'transparent';
+
+                const oldEmoji = modalImageContainer.querySelector('.modal-emoji');
+                if (oldEmoji) oldEmoji.remove();
+
+                let img = modalImageContainer.querySelector('img.modal-img');
+                if (!img) {
+                    img = document.createElement('img');
+                    img.className = 'modal-img';
+                    modalImageContainer.insertBefore(img, modalImageContainer.firstChild);
+                }
+                img.src = item.image;
+                img.alt = item.title || '';
+                img.style.cssText = `width:100%;height:100%;object-fit:${objectFit};object-position:center;background:${background};`;
+            } else {
+                const oldImg = modalImageContainer.querySelector('img.modal-img');
+                if (oldImg) oldImg.remove();
+                let emojiEl = modalImageContainer.querySelector('.modal-emoji');
+                if (!emojiEl) {
+                    emojiEl = document.createElement('div');
+                    emojiEl.className = 'modal-emoji';
+                    modalImageContainer.insertBefore(emojiEl, modalImageContainer.firstChild);
+                }
+                emojiEl.textContent = item.emoji || '🍽️';
+            }
+        }
+
+        // Actualizar textos
+        const modalTitle = document.getElementById('modalTitle');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalTags = document.getElementById('modalTags');
+        const counter = document.getElementById('modalCounter');
+
+        if (modalTitle) modalTitle.textContent = item.title || '';
+
+        if (modalPrice) {
+            if (item.price && item.price.trim() !== '') {
+                modalPrice.textContent = item.price;
+                modalPrice.style.display = 'block';
+            } else {
+                modalPrice.style.display = 'none';
+            }
+        }
+
+        if (modalDescription) {
+            if (item.description && item.description.trim() !== '') {
+                modalDescription.textContent = item.description;
+                modalDescription.style.display = 'block';
+            } else {
+                modalDescription.style.display = 'none';
+            }
+        }
+
+        if (modalTags) {
+            if (item.tags && item.tags.length > 0) {
+                modalTags.innerHTML = '';
+                item.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'modal-tag';
+                    tagEl.textContent = tag;
+                    modalTags.appendChild(tagEl);
+                });
+                modalTags.style.display = 'flex';
+            } else {
+                modalTags.style.display = 'none';
+            }
+        }
+
+        if (counter) {
+            counter.textContent = `${this.currentItemIndex + 1} / ${items.length}`;
+        }
     }
-}
 }
