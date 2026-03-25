@@ -721,3 +721,14 @@ body {
     color: rgba(255,248,220,0.45);
     font-style: italic;
 }
+
+.qr-blessing {
+    text-align: center;
+    margin-top: clamp(20px, 4vh, 32px);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-style: italic;
+    color: rgba(255, 248, 220, 0.45);
+    letter-spacing: 0.03em;
+    line-height: 1.8;
+}

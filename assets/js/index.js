@@ -5,6 +5,7 @@
 const PROMO_ITEMS = [
     { image: 'assets/img/promos/welcome_1.webp' },
     { image: 'assets/img/promos/welcome_2.webp' },
+    { image: 'assets/img/promos/paletas.webp' },
 ];
 
 let carouselIndex = 0;
