@@ -3,9 +3,7 @@
 // Usa { image: 'ruta' } para imágenes reales
 // ================================================================
 const PROMO_ITEMS = [
-    { image: 'assets/img/promos/welcome_1.webp' },
-    { image: 'assets/img/promos/welcome_2.webp' },
-    { image: 'assets/img/promos/paletas.webp' },
+    { image: 'assets/img/promos/beto.webp' }
 ];
 
 let carouselIndex = 0;
