@@ -3,7 +3,8 @@
 // Usa { image: 'ruta' } para imágenes reales
 // ================================================================
 const PROMO_ITEMS = [
-    { image: 'assets/img/promos/beto.webp' }
+    { image: 'assets/img/promos/bienvenida.webp' },
+    { image: 'assets/img/promos/paletas.webp' }
 ];
 
 let carouselIndex = 0;
@@ -46,7 +47,7 @@ function carouselMove(dir) { carouselGoTo(carouselIndex + dir); }
 
 function carouselAutoPlay() {
     if (PROMO_ITEMS.length > 1) {
-        carouselTimer = setInterval(() => carouselMove(1), 5000);
+        carouselTimer = setInterval(() => carouselMove(1), 10000);
     }
 }
 
